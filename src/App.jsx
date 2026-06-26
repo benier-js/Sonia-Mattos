@@ -26,6 +26,7 @@ const App = () => {
 
   const myEmail = 'sonia.mattos.biodecodage@gmail.com'
   const myPhone = '330783880162'
+  const titreEmail = 'Réservation de ' + formData.name
 
   const message = useMemo(() => {
     return `DEMANDE DE SÉANCE - BIODÉCODAGE\n-------------------------------\nBonjour, je suis ${formData.name}.\nJe souhaite réserver une séance.\n\nEmail : ${formData.email}\nNote : ${formData.note?.trim() || 'Aucune précision.'}`
@@ -35,7 +36,10 @@ const App = () => {
     e.preventDefault()
     const encodedMessage = encodeURIComponent(message)
     if (method === 'email') {
-      window.location.href = `mailto:${myEmail}?subject=Réservation&body=${encodedMessage}`
+      window.open(
+        `https://mail.google.com/mail/?view=cm&fs=1&to=${myEmail}&su=${titreEmail}&body=${encodedMessage}`,
+        '_blank'
+      )
     } else {
       window.open(`https://wa.me/${myPhone}?text=${encodedMessage}`, '_blank')
     }
