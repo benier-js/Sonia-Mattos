@@ -1,5 +1,5 @@
 ﻿'use client'
-
+import emailjs from '@emailjs/browser'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
   CheckCircle2,
@@ -28,19 +28,27 @@ const App = () => {
     return `DEMANDE DE SÉANCE - BIODÉCODAGE\n-------------------------------\nBonjour, je suis ${formData.name}.\nJe souhaite réserver une séance.\n\nEmail : ${formData.email}\nNote : ${formData.note?.trim() || 'Aucune précision.'}`
   }, [formData])
 
-  const handleSendMessage = (e) => {
+  const handleSendMessage = async (e) => {
     e.preventDefault()
-    const encodedMessage = encodeURIComponent(message)
-    if (method === 'email') {
-      console.log('clic')
-      window.open(
-        (window.location.href = `mailto:${myEmail}?subject=Réservation&body=${encodedMessage}`)
+
+    try {
+      await emailjs.send(
+        'i_xhJISezjCs92VozycLC',
+        'template_9pz9l58',
+        {
+          name: formData.name,
+          email: formData.email,
+          note: formData.note,
+        },
+        'Pt2JzzzZZgCBGyELh'
       )
-    } else {
-      window.open(`https://wa.me/${myPhone}?text=${encodedMessage}`, '_blank')
+
+      setIsSent(true)
+      setTimeout(() => setIsSent(false), 2000)
+    } catch (error) {
+      console.error('EmailJS error:', error)
+      alert('Erreur lors de l’envoi')
     }
-    setIsSent(true)
-    setTimeout(() => setIsSent(false), 2000)
   }
 
   return (
@@ -209,6 +217,7 @@ const App = () => {
                 </div>
 
                 <motion.button
+                  type="submit"
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                   className="flex items-center justify-center w-full gap-3 py-3.5 xl:py-4 text-base xl:text-lg font-bold text-white transition-colors shadow-lg cursor-pointer bg-emerald-900 hover:bg-teal-900 rounded-2xl"
