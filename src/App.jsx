@@ -2,20 +2,16 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import {
-  Leaf,
-  Haze,
-  MapPin,
   CheckCircle2,
   Flower2,
-  Heart,
+  Haze,
   Mail,
+  MapPin,
   MessageSquare,
   Send,
-  ShieldCheck,
   Sparkles,
   Star,
   User,
-  GalleryThumbnails,
 } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
@@ -36,9 +32,9 @@ const App = () => {
     e.preventDefault()
     const encodedMessage = encodeURIComponent(message)
     if (method === 'email') {
+      console.log('clic')
       window.open(
-        `https://mail.google.com/mail/?view=cm&fs=1&to=${myEmail}&su=${titreEmail}&body=${encodedMessage}`,
-        '_blank'
+        (window.location.href = `mailto:${myEmail}?subject=Réservation&body=${encodedMessage}`)
       )
     } else {
       window.open(`https://wa.me/${myPhone}?text=${encodedMessage}`, '_blank')
