@@ -137,7 +137,7 @@ const App = () => {
                 <FeatureCard
                   icon={<Haze size={18} />}
                   title="Transformation"
-                  desc="Transformer le sens chaché de vos symptômes."
+                  desc="Transformer le sens caché de vos symptômes."
                 />
                 <FeatureCard
                   icon={<MapPin size={18} />}
