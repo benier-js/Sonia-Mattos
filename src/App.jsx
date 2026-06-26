@@ -31,9 +31,18 @@ const App = () => {
   const handleSendMessage = async (e) => {
     e.preventDefault()
 
+    if (method === 'whatsapp') {
+      const encoded = encodeURIComponent(message)
+      window.open(`https://wa.me/${myPhone}?text=${encoded}`, '_blank')
+      setIsSent(true)
+      setTimeout(() => setIsSent(false), 2000)
+      return
+    }
+
+    // Email via EmailJS
     try {
-      await emailjs.send(
-        'i_xhJISezjCs92VozycLC',
+      const res = await emailjs.send(
+        'service_unb8fip',
         'template_9pz9l58',
         {
           name: formData.name,
@@ -42,12 +51,12 @@ const App = () => {
         },
         'Pt2JzzzZZgCBGyELh'
       )
-
+      console.log('SUCCESS:', res)
       setIsSent(true)
       setTimeout(() => setIsSent(false), 2000)
     } catch (error) {
-      console.error('EmailJS error:', error)
-      alert('Erreur lors de l’envoi')
+      console.error('EmailJS ERROR:', error)
+      alert('Échec envoi email — vérifiez la console')
     }
   }
 
