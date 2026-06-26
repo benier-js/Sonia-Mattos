@@ -185,7 +185,7 @@ const App = () => {
                   required
                 />
                 <Field
-                  label="Email"
+                  label="Email (Recommandé sur ordinateur)"
                   id="e"
                   type="email"
                   icon={<Mail size={18} />}
@@ -255,8 +255,8 @@ const App = () => {
             exit={{ opacity: 0, y: 20 }}
             className="fixed z-50 px-8 py-4 font-medium text-white -translate-x-1/2 rounded-full shadow-2xl bottom-8 left-1/2 bg-slate-900"
           >
-            🎉 Redirection vers{' '}
-            {method === 'email' ? 'votre boîte mail' : 'WhatsApp'}...
+            🎉 Envoi vers {method === 'email' ? 'votre boîte mail' : 'WhatsApp'}
+            ...
           </motion.div>
         )}
       </AnimatePresence>
