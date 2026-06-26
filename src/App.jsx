@@ -123,7 +123,7 @@ const App = () => {
                   </span>
                 </h1>
                 <p className="max-w-xl mt-4 leading-relaxed text-md text-slate-700 xl:text-base">
-                  Votre corps vous parle, écoutons ensempble ce qu'il a à vous
+                  Votre corps vous parle, écoutons ensemble ce qu'il a à vous
                   dire
                 </p>
               </div>
