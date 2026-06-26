@@ -211,7 +211,7 @@ const App = () => {
                 <motion.button
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
-                  className="flex items-center justify-center w-full gap-3 py-3.5 xl:py-4 text-base xl:text-lg font-bold text-white transition-colors shadow-lg cursor-pointer bg-slate-950 hover:bg-emerald-900 rounded-2xl"
+                  className="flex items-center justify-center w-full gap-3 py-3.5 xl:py-4 text-base xl:text-lg font-bold text-white transition-colors shadow-lg cursor-pointer bg-emerald-900 hover:bg-teal-900 rounded-2xl"
                 >
                   {isSent ? (
                     <>
