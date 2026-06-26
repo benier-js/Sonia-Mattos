@@ -137,12 +137,12 @@ const App = () => {
                 <FeatureCard
                   icon={<Haze size={18} />}
                   title="Transformation"
-                  desc="Transformer le sens caché de vos symptômes."
+                  desc="Transformez le sens caché de vos symptômes."
                 />
                 <FeatureCard
                   icon={<MapPin size={18} />}
                   title="Retrouver sa clarté"
-                  desc="Prendre du recul pour mieux comprendre ce que vous traversez."
+                  desc="Prenez du recul pour mieux comprendre ce que vous traversez."
                 />
               </div>
             </motion.section>
