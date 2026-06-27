@@ -98,7 +98,7 @@ const App = () => {
                     Sonia Mattos
                   </h2>
                   <p className="text-sm italic font-medium text-emerald-700">
-                    Thérapeute en biodécodage
+                    Praticienne en biodécodage
                   </p>
                 </div>
               </div>
@@ -110,25 +110,52 @@ const App = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               /* On utilise flex-1 pour qu'elle prenne la place restante sans dépasser */
-              className="flex-1 flex flex-col justify-between overflow-hidden rounded-[2rem] bg-white/60 p-6 xl:p-8 shadow-xl backdrop-blur-xl ring-1 ring-white/80"
+              className="flex-1 flex flex-col overflow-hidden rounded-[2rem] bg-white/60 p-6 xl:p-8 shadow-xl backdrop-blur-xl ring-1 ring-white/80"
             >
               <div>
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-emerald-700">
-                  <Sparkles size={13} /> Biodécodage thérapeutique
+                <div className="relative min-[1200px]:flex min-[1200px]:items-start min-[1200px]:gap-4">
+                  <div
+                    className="
+    inline-flex items-center gap-2 rounded-full
+    bg-emerald-50 px-4 py-2 text-[10px] font-bold
+    uppercase tracking-widest text-emerald-700
+
+    static mb-3
+
+    min-[1024px]:absolute min-[1024px]:-top-3 min-[1024px]:-right-3 min-[1024px]:mb-0
+
+    min-[1200px]:static min-[1200px]:mb-0 min-[1200px]:shrink-0 min-[1200px]:order-2
+  "
+                  >
+                    <Sparkles size={13} />
+                    Biodécodage thérapeutique
+                  </div>
+
+                  <div className="min-[1200px]:flex min-[1200px]:items-start min-[1200px]:gap-4 min-[1200px]:order-1">
+                    <h1 className="text-2xl font-bold tracking-tight text-slate-950 sm:text-2xl xl:text-3xl leading-[1.1]">
+                      Un espace doux, <br />
+                      <span className="font-serif italic text-emerald-700">
+                        propre et serein.
+                      </span>
+                    </h1>
+                  </div>
                 </div>
-                <h1 className="text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl xl:text-5xl leading-[1.1]">
-                  Un espace doux, <br />
-                  <span className="font-serif italic text-emerald-700">
-                    propre et serein.
-                  </span>
-                </h1>
-                <p className="max-w-xl mt-4 leading-relaxed text-md text-slate-700 xl:text-base">
-                  Votre corps vous parle, écoutons ensemble ce qu'il a à vous
-                  dire
+                <p className="max-w-xl mt-4 text-xl text-slate-900 xl:text-base">
+                  <p className="text-xl block mb-5">
+                    Comment se passe une séance ?
+                  </p>
+                  <p className="text-base leading-[1.5] font-serif italic text-slate-700 sm:text-2xs xl:text-base 2xl:text-lg">
+                    Mes séances sont basées sur l'échange et l'écoute. J'utilise
+                    des priotocoles, en décodage biologique vous permettant
+                    d'être complètement partie prenante à la séance. Nous
+                    cheminerons ensemble, écoutant vos ressentis, émotions. En
+                    travaillant sur le ressenti il devient possible le processus
+                    d'apaisement vers un nouvel équilibre
+                  </p>
                 </p>
               </div>
 
-              <div className="grid gap-3 mt-6 sm:grid-cols-3">
+              <div className="grid gap-3 mt-3 sm:grid-cols-3">
                 <FeatureCard
                   icon={<Flower2 size={18} />}
                   title="Écoute de soi"
@@ -185,7 +212,7 @@ const App = () => {
                   required
                 />
                 <Field
-                  label="Email (Recommandé sur ordinateur)"
+                  label="Email"
                   id="e"
                   type="email"
                   icon={<Mail size={18} />}
@@ -198,6 +225,7 @@ const App = () => {
                 />
               </div>
               <Field
+                className="flex-1"
                 label="Votre message"
                 id="m"
                 type="textarea"
@@ -215,7 +243,7 @@ const App = () => {
                     active={method === 'email'}
                     onClick={() => setMethod('email')}
                   >
-                    Email
+                    Email (Recommandé sur ordinateur)
                   </ToggleButton>
                   <ToggleButton
                     active={method === 'whatsapp'}
@@ -267,18 +295,21 @@ const App = () => {
 /* COMPOSANTS INTERNES */
 
 const FeatureCard = ({ icon, title, desc }) => (
-  <div className="p-4 transition-shadow shadow-sm xl:p-5 rounded-2xl bg-white/80 ring-1 ring-slate-200/50 hover:shadow-md">
-    <div className="inline-flex p-2 mb-3 xl:p-3 rounded-xl bg-emerald-50 text-emerald-600">
+  <div className="h-full flex flex-col p-4 transition-shadow shadow-sm rounded-2xl bg-white/80 ring-1 ring-slate-200/50 hover:shadow-md">
+    <div className="inline-flex p-2 mb-3 xl:p-3 rounded-xl bg-emerald-50 text-emerald-600 w-fit">
       {icon}
     </div>
-    <p className="text-sm font-bold xl:text-base text-slate-900">{title}</p>
-    <p className="mt-1 text-[11px] xl:text-sm leading-snug text-slate-500">
+
+    <p className="text-sm font-bold text-slate-900">{title}</p>
+
+    <p className="mt-1 text-[11px] leading-snug text-slate-500 flex-1">
       {desc}
     </p>
   </div>
 )
 
 const Field = ({
+  className = '',
   label,
   id,
   icon,
@@ -295,7 +326,7 @@ const Field = ({
     >
       {label}
     </label>
-    <div className="relative group">
+    <div className="relative group flex-1">
       <div className="absolute top-3.5 left-4 text-slate-400 opacity-50 group-focus-within:opacity-100 group-focus-within:text-emerald-600 transition-all pointer-events-none">
         {icon}
       </div>
@@ -305,8 +336,16 @@ const Field = ({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          rows={2}
-          className="w-full py-3 pl-12 pr-5 text-sm transition-all border outline-none resize-none xl:text-base rounded-xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-emerald-100/50"
+          className="
+  w-full flex-1
+  min-h-[150px]
+  min-[1280px]:min-h-[120px]
+  min-[1469px]:min-h-[150px]
+  py-3 pl-12 pr-5 text-sm
+  transition-all border outline-none resize-none
+  xl:text-base rounded-xl border-slate-200 bg-slate-50/50
+  focus:bg-white focus:ring-4 focus:ring-emerald-100/50
+"
         />
       ) : (
         <input
