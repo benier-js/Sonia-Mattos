@@ -14,6 +14,7 @@ import {
   User,
 } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
+emailjs.init({ publicKey: 'Pt2JzzzZZgCBGyELh' })
 
 const App = () => {
   const [formData, setFormData] = useState({ name: '', email: '', note: '' })
@@ -65,6 +66,10 @@ const App = () => {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
+      // Certaines touches (touches mortes, raccourcis système, IME) déclenchent
+      // un keydown sans e.key défini : on les ignore pour éviter le crash.
+      if (!e.key) return
+
       const expected = KONAMI_CODE[konamiProgress.current]
       const pressed = e.key.length === 1 ? e.key.toLowerCase() : e.key
 
@@ -104,22 +109,18 @@ const App = () => {
 
     // Email via EmailJS
     try {
-      const res = await emailjs.send(
-        'service_unb8fip',
-        'template_9pz9l58',
-        {
-          name: formData.name,
-          email: formData.email,
-          note: formData.note,
-        },
-        'Pt2JzzzZZgCBGyELh'
-      )
+      const res = await emailjs.send('service_kkerzv8', 'template_9pz9l58', {
+        name: formData.name,
+        email: formData.email,
+        note: formData.note,
+      })
       console.log('SUCCESS:', res)
       setIsSent(true)
       setTimeout(() => setIsSent(false), 2000)
     } catch (error) {
-      console.error('EmailJS ERROR:', error)
-      alert('Échec envoi email — vérifiez la console')
+      console.error('EmailJS ERROR status:', error?.status)
+      console.error('EmailJS ERROR text:', error?.text)
+      alert(`Échec envoi email : ${error?.text || 'vérifiez la console'}`)
     }
   }
 
@@ -227,7 +228,8 @@ const App = () => {
                     </h1>
                   </div>
                 </div>
-                <p className="max-w-xl mt-3 lg:mt-3 xl:mt-4 text-xl text-slate-900 xl:text-base">
+                {/* FIX : <p> parent remplacé par <div> pour éviter <p> imbriqué dans <p> */}
+                <div className="max-w-xl mt-3 lg:mt-3 xl:mt-4 text-xl text-slate-900 xl:text-base">
                   <p className="text-xl lg:text-lg block mb-3 lg:mb-3 xl:mb-5">
                     Comment se passe une séance ?
                   </p>
@@ -239,7 +241,7 @@ const App = () => {
                     travaillant sur le ressenti il devient possible le processus
                     d'apaisement vers un nouvel équilibre
                   </p>
-                </p>
+                </div>
               </div>
 
               <div className="grid gap-3 mt-3 sm:grid-cols-3">
